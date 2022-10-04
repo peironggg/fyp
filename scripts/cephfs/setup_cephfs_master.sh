@@ -23,15 +23,22 @@ for nodeIP in ${nodesIP[@]}; do
   # Copy cluster public SSH key to node
   ssh-copy-id -f -i /etc/ceph/ceph.pub root@$nodeIP
   # Tell ceph new node is part of cluster
-  ceph orch host add hostnames[$nodeIP] $nodeIP
+  sudo ceph orch host add hostnames[$nodeIP] $nodeIP
 
 # Bootstrap ceph
 cephadm bootstrap --mon-ip 10.10.1.1
 
 # Install cephfs
-ceph fs volume create $cephfs_name
+sudo ceph fs volume create $cephfs_name
 mkdir -p /mnt/cephfs
+
+# Grab ceph secret
 secret=sudo cat /etc/ceph/ceph.client.admin.keyring | grep key | cut -d= -f2
-sudo mount -t ceph admin@.$cephfs_name-fs=/ /mnt/cephfs -o secret=$secret==
+
+# Persist mount on reboots cephfs
+sudo chmod 770 /etc/fstab
+sudo printf "admin@.$cephfs_name-fs=/ /mnt/ceph ceph mon_addr=10.10.1.1,secret=$secret==,noatuime,_netdev,rw,cl 0 0\n" >> /etc/fstab
+
+sudo mount /mnt/cephfs
 
 # Set filesystem read,write,execute permissioning for user

@@ -10,8 +10,8 @@ sudo apt-get install libcurl4-openssl-dev
 # Install own forked version of filebench_ipfs and filebench
 filebench_vs=("filebench_ipfs" "filebench")
 
-for filebench in ${$filebench_vs[@]}; do
-  cd ../../$filebench
+for filebench in ${filebench_vs[@]}; do
+  cd $WORK_DIR/fyp/$filebench
 
   libtoolize
   aclocal
