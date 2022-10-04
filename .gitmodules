@@ -1,0 +1,6 @@
+[submodule "filebench"]
+	path = filebench
+	url = https://github.com/filebench/filebench.git
+[submodule "filebench_ipfs"]
+	path = filebench_ipfs
+	url = https://github.com/peironggg/filebench_ipfs.git
