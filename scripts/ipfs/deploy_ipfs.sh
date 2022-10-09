@@ -12,6 +12,6 @@ chmod +x $setup_bin
 # Grab peer ID of master node
 peerID=`ipfs id | grep 'ID' | cut -d':' -f2 | cut -d'"' -f2`
 
-for nodeIP in ${nodes[@]}; do
-  ssh $nodeIP 'bash -s' < $setup_bin $peerID $nodeIP
+for nodeIP in ${nodesIP[@]}; do
+  ssh -T $nodeIP 'bash -s' < $setup_bin $peerID
 done
