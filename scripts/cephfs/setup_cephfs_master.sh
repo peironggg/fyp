@@ -9,8 +9,8 @@ mount_point=/mnt/ceph
 install_cephadm_bin=./install_cephadm.sh
 nodesIP=("10.10.1.2" "10.10.1.3")
 declare -A hostnames
-hostnames[10.10.1.2]="node1.peirong3-135343.simbricks-PG0.utah.cloudlab.us"
-hostnames[10.10.1.3]="node2.peirong3-135343.simbricks-PG0.utah.cloudlab.us"
+hostnames[10.10.1.2]="node1.peirong3-135472.simbricks-PG0.utah.cloudlab.us"
+hostnames[10.10.1.3]="node2.peirong3-135472.simbricks-PG0.utah.cloudlab.us"
 
 chmod +x $install_cephadm_bin
 
