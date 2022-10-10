@@ -11,7 +11,7 @@ filesystems["nativefs"]="$WORK_DIR/fyp/filebench/filebench"  # /tmp
 
 # Workloads
 # workloads=("create_files.f" "delete.f" "random_read.f" "random_write.f" "seq_read.f" "seq_write.f")
-workloads=("delete.f")
+workloads=("create_files.f")
 
 # Create output folder
 rm -rf $output_dir
