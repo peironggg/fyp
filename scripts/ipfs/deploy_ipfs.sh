@@ -4,7 +4,9 @@
 # Run this script after setup_ipfs_master.sh
 # It requires that the master node has been set up with IPFS.
 
-nodesIP=("10.10.1.2" "10.10.1.3")
+set -o allexport
+source ~/fyp/scripts/bash_variables
+set +o allexportnodesIP=("10.10.1.2" "10.10.1.3")
 
 setup_bin=./setup_ipfs_worker.sh
 chmod +x $setup_bin

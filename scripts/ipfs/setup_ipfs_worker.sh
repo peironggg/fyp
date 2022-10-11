@@ -26,8 +26,7 @@ sudo scp root@10.10.1.1:/users/peirong3/.ipfs/swarm.key ~/.ipfs
 ipfs bootstrap add /ip4/10.10.1.1/tcp/4001/ipfs/$1
 
 # Disable local caching
-ipfs config Datestore.StorageGCWatermark 0
-ipfs config Datestore.StorageMax 0GB
+ipfs config Datastore.StorageMax 0GB
 
 bash -c "export LIBP2P_FORCE_PNET=1"
 

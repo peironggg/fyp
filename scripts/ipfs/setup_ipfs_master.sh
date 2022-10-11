@@ -30,8 +30,7 @@ peerID=`ipfs id | grep 'ID' | cut -d':' -f2 | cut -d'"' -f2`
 ipfs bootstrap add /ip4/10.10.1.1/tcp/4001/ipfs/${peerID}
 
 # Disable local caching
-ipfs config Datestore.StorageGCWatermark 0
-ipfs config Datestore.StorageMax 0GB
+ipfs config Datastore.StorageMax 0GB
 
 bash -c "export LIBP2P_FORCE_PNET=1"
 

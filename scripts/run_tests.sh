@@ -10,18 +10,17 @@ declare -A filesystems
 filesystems["nativefs"]="$WORK_DIR/fyp/filebench/filebench"  # /tmp
 
 # Workloads
-# workloads=("create_files.f" "delete.f" "random_read.f" "random_write.f" "seq_read.f" "seq_write.f")
-workloads=("create_files.f")
+workloads=("create_files.f" "delete.f" "random_read.f" "random_write.f" "seq_read.f" "seq_write.f")
 
 # Create output folder
-rm -rf $output_dir
+# rm -rf $output_dir
 mkdir -p $output_dir
 
 for fs in "${!filesystems[@]}"; do
   executable_path=${filesystems[$fs]}
   output_file=$output_dir/$fs
 
-  # Mount cephfs if testing cephfs now
+  # Setup
   if [ $fs = "cephfs" ]; then
     sudo mount $cephfs_mountpoint
   fi
@@ -40,8 +39,10 @@ for fs in "${!filesystems[@]}"; do
     printf "===========================================================================\n" >> $output_file
   done  
 
-  # Unmount cephfs if testing cephfs now
+  # Teardown
   if [ $fs = "cephfs" ]; then
     sudo umount $cephfs_mountpoint
+  elif [ $fs = "ipfs" ]; then
+    ipfs repo gc
   fi
 done

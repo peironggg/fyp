@@ -4,10 +4,14 @@
 # Installs cephadm on all nodes in cluster and adds them to cluster
 # Create cephfs volume and mount on master node
 
+set -o allexport
+source ~/fyp/scripts/bash_variables
+set +o allexport
+
 cephfs_name=filebench_fs
 mount_point=/mnt/ceph
 install_cephadm_bin=./install_cephadm.sh
-nodesIP=("10.10.1.2" "10.10.1.3")
+
 declare -A hostnames
 hostnames[10.10.1.2]="node1.peirong3-135472.simbricks-PG0.utah.cloudlab.us"
 hostnames[10.10.1.3]="node2.peirong3-135472.simbricks-PG0.utah.cloudlab.us"

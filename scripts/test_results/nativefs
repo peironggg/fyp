@@ -4,19 +4,133 @@ create_files.f
 Filebench Version 1.5-alpha3
 0.000: Allocated 177MB of shared memory
 0.001: Populating and pre-allocating filesets
-0.075: testF populated: 100000 files, avg. dir. width = 100, avg. dir. depth = 2.5, 0 leafdirs, 1464.844MB total size
-0.075: Removing testF tree (if exists)
-2.126: Pre-allocating directories in testF tree
-2.154: Pre-allocating files in testF tree
-2.347: Waiting for pre-allocation to finish (in case of a parallel pre-allocation)
-2.347: Population and pre-allocation of filesets completed
-2.347: Starting 3 files-createrP instances
-3.351: Running...
-5.351: Run took 2 seconds...
-5.351: Per-Operation Breakdown
-closeOP              99995ops    49991ops/s   0.0mb/s    0.002ms/op [0.001ms - 0.114ms]
-createOP             100000ops    49994ops/s   0.0mb/s    0.060ms/op [0.010ms - 5.854ms]
-5.352: IO Summary: 199995 ops 99985.102 ops/s 0/0 rd/wr   0.0mb/s 0.031ms/op
-5.352: Shutting down processes
+0.067: testF populated: 100000 files, avg. dir. width = 100, avg. dir. depth = 2.5, 0 leafdirs, 1464.844MB total size
+0.067: Removing testF tree (if exists)
+0.101: Pre-allocating directories in testF tree
+0.125: Pre-allocating files in testF tree
+0.301: Waiting for pre-allocation to finish (in case of a parallel pre-allocation)
+0.318: Population and pre-allocation of filesets completed
+0.318: Starting 3 files-createrP instances
+1.321: Running...
+3.322: Run took 2 seconds...
+3.322: Per-Operation Breakdown
+closeOP              99995ops    49990ops/s   0.0mb/s    0.002ms/op [0.001ms - 0.340ms]
+createOP             100000ops    49993ops/s   0.0mb/s    0.060ms/op [0.011ms - 6.137ms]
+3.322: IO Summary: 199995 ops 99982.753 ops/s 0/0 rd/wr   0.0mb/s 0.031ms/op
+3.322: Shutting down processes
+===========================================================================
+===========================================================================
+===========================================================================
+delete.f
+===========================================================================
+Filebench Version 1.5-alpha3
+0.000: Allocated 177MB of shared memory
+0.002: Populating and pre-allocating filesets
+0.014: testF populated: 6000 files, avg. dir. width = 0, avg. dir. depth = -0.0, 0 leafdirs, 87.891MB total size
+0.014: Removing testF tree (if exists)
+1.031: Pre-allocating directories in testF tree
+1.145: Pre-allocating files in testF tree
+1.332: Waiting for pre-allocation to finish (in case of a parallel pre-allocation)
+1.332: Population and pre-allocation of filesets completed
+1.332: Starting 3 files-deleterP instances
+2.335: Running...
+3.336: Run took 1 seconds...
+3.620: Per-Operation Breakdown
+finishOP             5995ops     4668ops/s   0.0mb/s    0.000ms/op [0.000ms - 0.001ms]
+deleteOP             6000ops     4672ops/s   0.0mb/s    0.030ms/op [0.016ms - 0.437ms]
+3.620: IO Summary:  6000 ops 4671.620 ops/s 0/0 rd/wr   0.0mb/s 0.030ms/op
+3.620: Shutting down processes
+===========================================================================
+===========================================================================
+===========================================================================
+random_read.f
+===========================================================================
+Filebench Version 1.5-alpha3
+0.000: Allocated 177MB of shared memory
+0.001: Populating and pre-allocating filesets
+0.003: testF populated: 1000 files, avg. dir. width = 0, avg. dir. depth = -0.0, 0 leafdirs, 14.648MB total size
+0.003: Removing testF tree (if exists)
+0.221: Pre-allocating directories in testF tree
+0.249: Pre-allocating files in testF tree
+0.283: Waiting for pre-allocation to finish (in case of a parallel pre-allocation)
+0.283: Population and pre-allocation of filesets completed
+0.283: Starting 3 random-readerP instances
+1.287: Running...
+11.288: Run took 10 seconds...
+11.288: Per-Operation Breakdown
+closeOP              4272701ops   427227ops/s   0.0mb/s    0.001ms/op [0.001ms - 0.567ms]
+random-readOP        4272703ops   427227ops/s 2086.1mb/s    0.002ms/op [0.001ms - 0.910ms]
+openOP               4272706ops   427227ops/s   0.0mb/s    0.005ms/op [0.002ms - 1.025ms]
+11.288: IO Summary: 12818110 ops 1281680.397 ops/s 427227/0 rd/wr 2086.1mb/s 0.003ms/op
+11.288: Shutting down processes
+===========================================================================
+===========================================================================
+===========================================================================
+random_write.f
+===========================================================================
+Filebench Version 1.5-alpha3
+0.000: Allocated 177MB of shared memory
+0.001: Populating and pre-allocating filesets
+0.003: testF populated: 1000 files, avg. dir. width = 0, avg. dir. depth = -0.0, 0 leafdirs, 14.648MB total size
+0.003: Removing testF tree (if exists)
+0.062: Pre-allocating directories in testF tree
+0.087: Pre-allocating files in testF tree
+0.116: Waiting for pre-allocation to finish (in case of a parallel pre-allocation)
+0.116: Population and pre-allocation of filesets completed
+0.116: Starting 3 random-writerP instances
+1.120: Running...
+11.121: Run took 10 seconds...
+11.121: Per-Operation Breakdown
+closeOP              3895139ops   389464ops/s   0.0mb/s    0.001ms/op [0.001ms - 1.412ms]
+random-writeOP       3895142ops   389464ops/s 1901.7mb/s    0.005ms/op [0.002ms - 125.996ms]
+openOP               3895145ops   389465ops/s   0.0mb/s    0.004ms/op [0.002ms - 1.345ms]
+11.121: IO Summary: 11685426 ops 1168393.046 ops/s 0/389464 rd/wr 1901.7mb/s 0.003ms/op
+11.121: Shutting down processes
+===========================================================================
+===========================================================================
+===========================================================================
+seq_read.f
+===========================================================================
+Filebench Version 1.5-alpha3
+0.000: Allocated 177MB of shared memory
+0.001: Populating and pre-allocating filesets
+0.003: testF populated: 1000 files, avg. dir. width = 0, avg. dir. depth = -0.0, 0 leafdirs, 14.648MB total size
+0.003: Removing testF tree (if exists)
+0.089: Pre-allocating directories in testF tree
+0.111: Pre-allocating files in testF tree
+0.141: Waiting for pre-allocation to finish (in case of a parallel pre-allocation)
+0.141: Population and pre-allocation of filesets completed
+0.141: Starting 3 seq-readerP instances
+1.145: Running...
+11.146: Run took 10 seconds...
+11.146: Per-Operation Breakdown
+closeOP              4218666ops   421825ops/s   0.0mb/s    0.001ms/op [0.001ms - 1.230ms]
+seq-readOP           4218666ops   421825ops/s 2059.7mb/s    0.002ms/op [0.001ms - 0.733ms]
+openOP               4218669ops   421826ops/s   0.0mb/s    0.005ms/op [0.002ms - 1.286ms]
+11.146: IO Summary: 12656001 ops 1265476.463 ops/s 421825/0 rd/wr 2059.7mb/s 0.003ms/op
+11.146: Shutting down processes
+===========================================================================
+===========================================================================
+===========================================================================
+seq_write.f
+===========================================================================
+Filebench Version 1.5-alpha3
+0.000: Allocated 177MB of shared memory
+0.001: Populating and pre-allocating filesets
+0.003: testF populated: 1000 files, avg. dir. width = 0, avg. dir. depth = -0.0, 0 leafdirs, 14.648MB total size
+0.003: Removing testF tree (if exists)
+0.079: Pre-allocating directories in testF tree
+0.106: Pre-allocating files in testF tree
+0.136: Waiting for pre-allocation to finish (in case of a parallel pre-allocation)
+0.136: Population and pre-allocation of filesets completed
+0.136: Starting 3 seq-writerP instances
+1.140: Running...
+11.141: Run took 10 seconds...
+11.141: Per-Operation Breakdown
+closeOP              4520364ops   451982ops/s   0.0mb/s    0.001ms/op [0.001ms - 0.799ms]
+seq-writeOP          4520364ops   451982ops/s 2206.9mb/s    0.004ms/op [0.002ms - 1.465ms]
+openOP               4520367ops   451983ops/s   0.0mb/s    0.004ms/op [0.002ms - 1.439ms]
+11.141: IO Summary: 13561095 ops 1355947.735 ops/s 0/451982 rd/wr 2206.9mb/s 0.003ms/op
+11.141: Shutting down processes
 ===========================================================================
 ===========================================================================
