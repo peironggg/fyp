@@ -35,6 +35,8 @@ for nodeIP in ${nodesIP[@]}; do
   sudo ssh-copy-id -f -i /etc/ceph/ceph.pub root@$nodeIP
   # Tell ceph new node is part of cluster
   sudo ceph orch host add ${hostnames[$nodeIP]} $nodeIP
+  # Make all hosts admin
+  sudo ceph orch host label add ${hostnames[$nodeIP]} _admin
 done
 
 # Setup object storages for all devices
