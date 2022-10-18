@@ -9,7 +9,6 @@ source ~/fyp/scripts/bash_variables
 set +o allexport
 
 cephfs_name=filebench_fs
-mount_point=/mnt/ceph
 install_cephadm_bin=./install_cephadm.sh
 
 declare -A hostnames
@@ -25,7 +24,7 @@ $install_cephadm_bin
 sudo apt-get install ceph-common
 
 # # Bootstrap ceph
-sudo cephadm bootstrap --mon-ip 10.10.1.1 --allow-fqdn-hostname
+sudo cephadm bootstrap --mon-ip 10.10.1.1
 
 # Add hosts to cluster
 for nodeIP in ${nodesIP[@]}; do
@@ -35,25 +34,17 @@ for nodeIP in ${nodesIP[@]}; do
   sudo ssh-copy-id -f -i /etc/ceph/ceph.pub root@$nodeIP
   # Tell ceph new node is part of cluster
   sudo ceph orch host add ${hostnames[$nodeIP]} $nodeIP
-  # Make all hosts admin
-  sudo ceph orch host label add ${hostnames[$nodeIP]} _admin
 done
 
 # Setup object storages for all devices
 sudo ceph orch apply osd --all-available-devices
 
-# Install cephfs
+# Create cephfs
 sudo ceph fs volume create $cephfs_name
-sudo mkdir -p $mount_point
 
 # Grab ceph secret
 secret=$(sudo ceph auth get-key client.admin)
 
 # Persist mount on reboots cephfs
 sudo chmod 770 /etc/fstab
-sudo printf ":/ $mount_point ceph name=admin,secret=$secret,noatime,_netdev,rw,acl 0 0\n" >> /etc/fstab
-
-sudo mount $mount_point
-
-# Set filesystem read,write,execute permissioning for user
-sudo chmod go+w $mount_point
+sudo printf ":/ $cephfs_mountpoint ceph name=admin,secret=$secret,noatime,_netdev,rw,acl 0 0\n" >> /etc/fstab

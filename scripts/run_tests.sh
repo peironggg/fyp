@@ -1,8 +1,12 @@
 #!/bin/bash
 
+set -o allexport
+source ~/fyp/scripts/bash_variables
+set +o allexport
+
 WORK_DIR=~
 output_dir=test_results
-cephfs_mountpoint=/tmp
+
 declare -A filesystems
 # hashmap value = filebench executable path
 # filesystems["cephfs"]="$WORK_DIR/fyp/filebench/filebench"  # /mnt/cephfs
@@ -21,8 +25,10 @@ for fs in "${!filesystems[@]}"; do
   output_file=$output_dir/$fs
 
   # Setup
-  if [ $fs = "cephfs" ]; then
+  if [ $fs = "cephfs" ]; then  
     sudo mount $cephfs_mountpoint
+    # Set filesystem read,write,execute permissioning for user
+    sudo chmod go+w $cephfs_mountpoint
   fi
 
   # Create output file

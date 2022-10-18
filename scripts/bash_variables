@@ -1,1 +1,2 @@
 nodesIP=("10.10.1.2" "10.10.1.3")
+cephfs_mountpoint=/tmp
