@@ -9,9 +9,9 @@ output_dir=test_results
 
 declare -A filesystems
 # hashmap value = filebench executable path
-filesystems["cephfs"]="$WORK_DIR/fyp/filebench/filebench"  # /tmp
+# filesystems["cephfs"]="$WORK_DIR/fyp/filebench/filebench"  # /tmp
 # filesystems["ipfs"]="$WORK_DIR/fyp/filebench_ipfs/filebench_ipfs"  # /tmp
-# filesystems["nativefs"]="$WORK_DIR/fyp/filebench/filebench"  # /tmp
+filesystems["nativefs"]="$WORK_DIR/fyp/filebench/filebench"  # /tmp
 
 # Workloads
 workloads=("create_files.f" "delete.f" "random_read.f" "random_write.f" "seq_read.f" "seq_write.f")
