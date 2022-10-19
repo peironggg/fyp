@@ -12,8 +12,9 @@ cephfs_name=filebench_fs
 install_cephadm_bin=./install_cephadm.sh
 
 declare -A hostnames
-hostnames[10.10.1.2]="node1.peirong3-135472.simbricks-PG0.utah.cloudlab.us"
-hostnames[10.10.1.3]="node2.peirong3-135472.simbricks-PG0.utah.cloudlab.us"
+hostnames[10.10.1.2]="pc203"
+hostnames[10.10.1.3]="pc201"
+hostnames[10.10.1.4]="pc204"
 
 chmod +x $install_cephadm_bin
 
@@ -36,8 +37,10 @@ for nodeIP in ${nodesIP[@]}; do
   sudo ceph orch host add ${hostnames[$nodeIP]} $nodeIP
 done
 
-# Setup object storages for all devices
-sudo ceph orch apply osd --all-available-devices
+# Setup object storages for all worker nodes
+for nodeIP in ${nodesIP[@]}; do
+  sudo ceph orch daemon add osd ${hostnames[$nodeIP]}:/dev/sdb
+done
 
 # Create cephfs
 sudo ceph fs volume create $cephfs_name

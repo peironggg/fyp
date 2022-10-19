@@ -9,15 +9,14 @@ output_dir=test_results
 
 declare -A filesystems
 # hashmap value = filebench executable path
-# filesystems["cephfs"]="$WORK_DIR/fyp/filebench/filebench"  # /mnt/cephfs
+filesystems["cephfs"]="$WORK_DIR/fyp/filebench/filebench"  # /tmp
 # filesystems["ipfs"]="$WORK_DIR/fyp/filebench_ipfs/filebench_ipfs"  # /tmp
-filesystems["nativefs"]="$WORK_DIR/fyp/filebench/filebench"  # /tmp
+# filesystems["nativefs"]="$WORK_DIR/fyp/filebench/filebench"  # /tmp
 
 # Workloads
 workloads=("create_files.f" "delete.f" "random_read.f" "random_write.f" "seq_read.f" "seq_write.f")
 
 # Create output folder
-# rm -rf $output_dir
 mkdir -p $output_dir
 
 for fs in "${!filesystems[@]}"; do
@@ -31,8 +30,9 @@ for fs in "${!filesystems[@]}"; do
     sudo chmod go+w $cephfs_mountpoint
   fi
 
-  # Create output file
+  # Create and clear output file
   touch $output_file
+  > $output_file
 
   for workload in ${workloads[@]}; do
     printf "===========================================================================\n" >> $output_file
