@@ -1,8 +1,8 @@
 set $dir=/tmp
 set $filesize=15k
 set $iosize=5k
-set $nfiles=6000
-set $count=6000
+set $nfiles=1000
+set $count=1000
 
 set mode quit firstdone
 

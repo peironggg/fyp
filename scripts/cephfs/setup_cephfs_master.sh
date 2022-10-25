@@ -12,9 +12,9 @@ cephfs_name=filebench_fs
 install_cephadm_bin=./install_cephadm.sh
 
 declare -A hostnames
-hostnames[10.10.1.2]="pc203"
-hostnames[10.10.1.3]="pc201"
-hostnames[10.10.1.4]="pc204"
+hostnames[10.10.1.2]="pc311"
+hostnames[10.10.1.3]="pc309"
+hostnames[10.10.1.4]="pc290"
 
 chmod +x $install_cephadm_bin
 
@@ -22,7 +22,7 @@ chmod +x $install_cephadm_bin
 $install_cephadm_bin
 
 # Install ceph CLI + mount.ceph helper + setfacl
-sudo apt-get install ceph-common
+sudo apt-get -y install ceph-common
 
 # # Bootstrap ceph
 sudo cephadm bootstrap --mon-ip 10.10.1.1
@@ -42,7 +42,7 @@ for nodeIP in ${nodesIP[@]}; do
   sudo ceph orch daemon add osd ${hostnames[$nodeIP]}:/dev/sdb
 done
 
-# Create cephfs
+# # Create cephfs
 sudo ceph fs volume create $cephfs_name
 
 # Grab ceph secret

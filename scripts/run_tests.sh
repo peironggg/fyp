@@ -6,12 +6,13 @@ set +o allexport
 
 WORK_DIR=~
 output_dir=test_results
+num_trials=3
 
 declare -A filesystems
 # hashmap value = filebench executable path
 # filesystems["cephfs"]="$WORK_DIR/fyp/filebench/filebench"  # /tmp
-# filesystems["ipfs"]="$WORK_DIR/fyp/filebench_ipfs/filebench_ipfs"  # /tmp
-filesystems["nativefs"]="$WORK_DIR/fyp/filebench/filebench"  # /tmp
+filesystems["ipfs"]="$WORK_DIR/fyp/filebench_ipfs/filebench_ipfs"  # /tmp
+# filesystems["nativefs"]="$WORK_DIR/fyp/filebench/filebench"  # /tmp
 
 # Workloads
 workloads=("create_files.f" "delete.f" "random_read.f" "random_write.f" "seq_read.f" "seq_write.f")
@@ -20,8 +21,7 @@ workloads=("create_files.f" "delete.f" "random_read.f" "random_write.f" "seq_rea
 mkdir -p $output_dir
 
 for fs in "${!filesystems[@]}"; do
-  executable_path=${filesystems[$fs]}
-  output_file=$output_dir/$fs
+  executable_path=${filesystems[$fs]}  
 
   # Setup
   if [ $fs = "cephfs" ]; then  
@@ -30,20 +30,24 @@ for fs in "${!filesystems[@]}"; do
     sudo chmod go+w $cephfs_mountpoint
   fi
 
-  # Create and clear output file
-  touch $output_file
-  > $output_file
+  for ((i=0; i<$num_trials; i++)); do
+    # Create and clear output file
+    output_filename="$fs-$i"
+    output_filepath=$output_dir/$output_filename
+    touch $output_filepath
+    > $output_filepath
 
-  for workload in ${workloads[@]}; do
-    printf "===========================================================================\n" >> $output_file
-    printf "$workload\n" >> $output_file
-    printf "===========================================================================\n" >> $output_file
+    for workload in ${workloads[@]}; do
+      printf "===========================================================================\n" >> $output_filepath
+      printf "$workload\n" >> $output_filepath
+      printf "===========================================================================\n" >> $output_filepath
 
-    sudo $executable_path -f $WORK_DIR/fyp/workloads/$workload >> $output_file
+      sudo $executable_path -f $WORK_DIR/fyp/workloads/$workload >> $output_filepath
 
-    printf "===========================================================================\n" >> $output_file
-    printf "===========================================================================\n" >> $output_file
-  done  
+      printf "===========================================================================\n" >> $output_filepath
+      printf "===========================================================================\n" >> $output_filepath
+    done  
+done
 
   # Teardown
   if [ $fs = "cephfs" ]; then

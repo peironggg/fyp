@@ -1,7 +1,7 @@
 set $dir=/tmp
 set $filesize=15k
 set $iosize=5k
-set $nfiles=100000
+set $nfiles=1000
 set $meandirwidth=100
 
 set mode quit firstdone
