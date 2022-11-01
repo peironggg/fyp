@@ -14,4 +14,5 @@ define process name="files-deleterP",instances=3 {
     }
 }
 
+enable lathist
 run 10

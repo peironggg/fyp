@@ -12,4 +12,5 @@ define process name="random-readerP",instances=3 {
     }
 }
 
+enable lathist
 run 10

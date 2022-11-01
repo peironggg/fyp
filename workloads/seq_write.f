@@ -12,4 +12,5 @@ define process name="seq-writerP",instances=3 {
     }
 }
 
+enable lathist
 run 10

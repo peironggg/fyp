@@ -12,4 +12,5 @@ define process name="random-writerP",instances=3 {
     }
 }
 
+enable lathist
 run 10
